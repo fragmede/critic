@@ -183,6 +183,8 @@ def createChangeset(db, user, repository, commit=None, from_commit=None, to_comm
 
             db.commit()
 
+            return []
+            
             client.requestChangesets([request])
 
             db.commit()
