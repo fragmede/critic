@@ -325,8 +325,11 @@ class PeerServer(BackgroundProcess):
             else: return None
 
         def do_read(self):
+            self.debug("starting do_read")
             while True:
+                self.debug("about to read")
                 read = os.read(self.__reading.fileno(), 4096)
+                self.debug("reading finished")
                 if not read:
                     self.reading_done(self.__reading)
                     self.__reading = None
@@ -334,6 +337,7 @@ class PeerServer(BackgroundProcess):
                     self.handle_input(self.__read_data)
                     break
                 self.__read_data += read
+            self.debug("do_read finished")
 
         def writing_done(self, writing):
             writing.close()
